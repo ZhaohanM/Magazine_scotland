@@ -1,0 +1,54 @@
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Contact Us
+{% endblock %}
+
+{% block body_block %}
+{% if user.is_authenticated %}
+  <div class="third-div nav-third">
+    <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+    <div class="dropdown">
+      <a href="{% url 'magportal:membership' %}">Membership</a>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:edit_profile' user.get_username|slugify %}" >My Profile</a>
+        <p><a href="{% url 'magportal:view_profile' user.get_username|slugify %}">My Magazines</a></p>
+      </div>
+    </div>
+    <a href="{% url 'magportal:contact' %}">Contact</a><br>
+    <a href="{% url 'magportal:logout' %}">Logout</a><br>
+  </div>
+{% else %}
+  <div class="third-div nav-third">
+    <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+    <div class="dropdown">
+    <a href="{% url 'magportal:login' %}">Membership</a>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:login' %}">My Profile</a>
+        <a href="{% url 'magportal:login' %}">My Magazines</a>
+      </div>
+    </div>
+    <a href="{% url 'magportal:contact' %}">Contact</a><br>	
+    <a href="{% url 'magportal:login' %}">Login</a><br>
+  </div>
+{% endif %}
+
+<div class="third-div">
+    <p style="margin: 80px;">
+        <span style="font-size: 20px;">
+            {% for codelist in codes %}
+                {% for code in codelist %}
+                    {{code}}
+                    <br>
+                {% endfor %} 
+            <br>
+            <br>
+            {% endfor %}
+        </span>
+    </p>
+</div>
+<div class="third-div">
+    
+</div>
+{% endblock %}

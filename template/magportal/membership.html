@@ -1,0 +1,78 @@
+<!---
+    Expects as context:
+    profile - the profile being viewed
+-->
+{% extends 'magportal/base.html' %}
+{% load static %}
+{% block head_block %}
+
+    <script src="https://js.stripe.com/v3/"></script>  <!-- new -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+
+{% endblock %}
+
+{% block title_block %}
+CLÒ Membership
+{% endblock %}
+
+{% block body_block %}
+<div class="third-div nav-third">
+  <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+  <div class="dropdown">
+    <a href="{% url 'magportal:membership' %}">Membership</a>
+    <div class="dropdown-content">
+      <a href="{% url 'magportal:edit_profile' user.get_username|slugify %}">My Profile</a>
+      <a href="{% url 'magportal:view_profile' user.get_username|slugify %}">My Magazines</a>
+    </div>
+  </div>
+  <a href="{% url 'magportal:contact' %}">Contact</a><br>
+  <a href="{% url 'magportal:logout' %}">Logout</a><br>
+</div>
+  
+<div class="third-div">
+  <span style="font-size: 20px;">
+    <h1 style="margin: 20px; font-size: 25px;">Your Plan:</h1>
+    <p style="margin: 20px;">
+      Lorem ipsum dolor sit amet, consectetuer
+      adipiscing elit, sed diam nonummy nibh
+      euismod tincidunt ut laoreet dolore magna
+      aliquam erat volutpat. Ut wisi enim ad minim
+      veniam, quis nostrud exerci tation.</p>
+    <p style="margin: 20px;">
+      • Lorem ipsum dolor sit amet, consectetuer
+      adipiscing elit, sed diam nonummy nibh
+      euismod tincidunt ut.</p>
+    <p style="margin: 20px;">
+      • Ut wisi enim ad minim veniam, quis nostrud
+      exerci tation.</p>
+    <p style="margin: 20px;">
+      • Duis autem vel eum iriure dolor in hendrerit in
+      vulputate velit esse molestie consequat, vel
+      illum dolore u feugiat nulla facilisis.</p>
+    <p style="margin: 20px;">
+      • Vero eros et accumsan et iusto odio dignissim
+      qui blandit present luptatum zzril delenit
+      augue duis dolore te feugait nulla facilisi.</p>
+  </span>
+  </p>
+  {% if membership == True %}
+  <b>Subscription valid until: {{ profile.Membership }}</b>
+  <a href="{% url 'magportal:cancel_membership' %}" class="indented button-container">
+    <button class="button">Cancel</button>
+  </a>
+  {% else %}
+  <b style="margin: 20px; color:blue">Currently not a member.</b>
+  {% endif %}
+</div>
+  <div class="third-div">  
+    <div id="membership" style="margin: 20px; text-align: center;">
+      <h1 style="font-size: 25px;"> Please select your membership:</h1>
+      <center>
+      <button class="blu-btn" id="submitBtn" style="font-size: large; width: 300px;">3 month membership</button><br>
+      <button class="blu-btn" id="submitBtn6" style="font-size: large; width: 300px;">6 month membership</button><br>
+      <button class="blu-btn" id="submitBtnYear" style="font-size: large; width: 300px;">1 year membership</button>
+      </center>
+    </div>
+  </div>
+{% endblock %}

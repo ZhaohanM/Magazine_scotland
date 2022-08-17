@@ -1,0 +1,20 @@
+<!--
+    Expects as context:
+    magazine_form
+-->
+
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Add Magazine
+{% endblock %}
+
+{% block content_block %}
+    <form id="create-magazine-form" method="POST" action="{% url 'magportal:add_magazine' %}" enctype="multipart/form-data">
+        <h1>Add a new magazine:</h1>
+        {% csrf_token %}
+        {{ magazine_form.as_p }}
+        <input id="create-magazine-submit" type="submit" name="submit" value="Create Magazine">        
+    </form>
+{% endblock %}

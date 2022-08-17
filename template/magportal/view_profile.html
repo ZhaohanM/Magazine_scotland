@@ -1,0 +1,62 @@
+<!---
+    Expects as context:
+    profile - the profile being viewed
+    membership - a boolean string, describing whether the user has his membership activated
+-->
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    {{ profile.UserAccount.username }}'s Favourites
+{% endblock %}
+
+{% block head_block %}
+<link href="{% static '/css/favs.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body_block %}
+{% if user.is_authenticated %}
+  <div class="third-div nav-third">
+    <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+    <div class="dropdown">
+      <a href="{% url 'magportal:membership' %}">Membership</a>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:edit_profile' user.get_username|slugify %}" >My Profile</a>
+        <p><a href="{% url 'magportal:view_profile' user.get_username|slugify %}">My Magazines</a></p>
+      </div>
+    </div>
+    <a href="{% url 'magportal:contact' %}">Contact</a><br>
+    <a href="{% url 'magportal:logout' %}">Logout</a><br>
+  </div>
+{% else %}
+  <div class="third-div nav-third">
+    <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+    <div class="dropdown">
+    <a href="{% url 'magportal:login' %}">Membership</a>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:login' %}">My Profile</a>
+        <a href="{% url 'magportal:login' %}">My Magazines</a>
+      </div>
+    </div>
+    <a href="{% url 'magportal:contact' %}">Contact</a><br>	
+    <a href="{% url 'magportal:login' %}">Login</a><br>
+  </div>
+{% endif %}
+<div class="third-div">
+  <div class="fav-mags">
+    <p style="margin: 40px;">
+      <b style="font-size: 20px;">Favourite Magazines of {{ profile.UserAccount.username }}:</b><br>
+      <br>
+      <br>
+      {% for result in profile.Favourites.all %}
+        <a class="name" href="{{ result.URL }}">{{ result.Name }}<br> 
+        {% for cat in result.Categories.all %}
+          <span style="font-size: 18px; color: grey;">{{ cat }}</span>
+        {% endfor %}
+        </a>
+      {% endfor %}
+    </p>
+  </div>
+  
+<div class="third-div">
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Edit Profile
+{% endblock %}
+
+{% block head_block %}
+<style>
+  form p {
+    margin:30px;
+  }
+</style>
+{% endblock %}
+{% block body_block %}
+{% if user.is_authenticated %}
+  <div class="third-div nav-third">
+    <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+    <div class="dropdown">
+      <a href="{% url 'magportal:membership' %}">Membership</a>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:edit_profile' user.get_username|slugify %}" >My Profile</a>
+        <p><a href="{% url 'magportal:view_profile' user.get_username|slugify %}">My Magazines</a></p>
+      </div>
+    </div>
+    <a href="{% url 'magportal:contact' %}">Contact</a><br>
+    <a href="{% url 'magportal:logout' %}">Logout</a><br>
+  </div>
+{% else %}
+  <div class="third-div nav-third">
+    <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+    <div class="dropdown">
+    <a href="{% url 'magportal:login' %}">Membership</a>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:login' %}">My Profile</a>
+        <a href="{% url 'magportal:login' %}">My Magazines</a>
+      </div>
+    </div>
+    <a href="{% url 'magportal:contact' %}">Contact</a><br>	
+    <a href="{% url 'magportal:login' %}">Login</a><br>
+  </div>
+{% endif %}
+
+<div class="third-div">
+  <span style="font-size: 15px; margin:20px;">
+    <form id="edit-profile-form" method="POST" enctype="multipart/form-data" ,
+      action="{% url 'magportal:edit_profile' user.get_username|slugify%}">
+      <p>
+        <span style="font-size: 30px;"> Edit Profile of {{ request.user.username }}:</span>
+        {% csrf_token %}
+        {{ user_form.as_p }}
+      </p>
+      <input class="blu-btn" style="float:right; padding-left: 40px; padding-right: 40px;" type="submit" name="submit" value="Save">
+      <br>
+      <br>
+      <br>
+        <p>Subscription:</p>
+        <br>
+        {% if membership == True %}
+        <b style="margin: 100px;color:#2F52E0;">Subscription valid until: {{ profile.Membership }}</b>
+        {% else %}
+        <b style="margin: 100px;color:#2F52E0">Currently not a member.</b>
+        {% endif %}
+    </form>
+  </span>
+</div>
+{% endblock %}

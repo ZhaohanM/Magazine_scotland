@@ -1,0 +1,124 @@
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    All Magazines
+{% endblock %}
+
+{% block head_block %}
+<link href="{% static '/css/mags.css' %}" rel="stylesheet">
+<script>
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+  window.onload = function() {
+    document.getElementById('img1').style.display = 'block';
+    document.getElementById('desc1').style.display = 'block';
+  }
+
+  function show(x) {
+    imgs = document.getElementsByClassName("mag-img")
+    descs = document.getElementsByClassName("mag-desc")
+    for (var i=0; i < imgs.length; i++) {
+      imgs[i].style.display = 'none';
+      descs[i].style.display = 'none';
+    }
+    document.getElementById('img'.concat(x)).style.display = 'block';
+    document.getElementById('desc'.concat(x)).style.display = 'block';
+  }
+</script>
+{% endblock %}
+
+{% block body_block %} 
+  <div class="nav-third third-div">
+    <div class="dropdown">
+      {% if cat %}
+        <button onclick="myFunction()" class="dropbtn">{{cat}}</button>
+      {% else %}
+        <button onclick="myFunction()" class="dropbtn">Select Category</button>
+      {% endif %}
+      <div id="myDropdown" class="dropdown-content">
+        <a href="{% url 'magportal:browse_magazines' %}" >All</a>
+        {% for cat in cats %}
+          <a href="{% url 'magportal:browse_category' cat.Slug %}" >{{cat.Name}}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <hr>
+    <div class="mag-scroll">
+    {% for result in results %}
+      <a class="name" href="{{ result.URL }}" onmouseover = 'show("{{forloop.counter}}")'>{{ result.Name }}<br> 
+      {% for cat in result.Categories.all %}
+        <span style="font-size: 18px; color: grey;">{{ cat }}</span>
+      {% endfor %}
+      </a>
+    {% endfor %}
+    </div>
+    <hr>
+    {% if user.is_authenticated %}
+    <div class="dropdown">
+      <span><a href="{% url 'magportal:membership' %}">Membership</a></span>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:edit_profile' user.get_username|slugify %}">My Profile</a>
+        <a href="{% url 'magportal:view_profile' user.get_username|slugify %}">My Magazines</a>
+      </div>
+    </div>
+    <a href="{% url 'magportal:logout' %}" class="login-btn">Logout</a>
+    {% else %}
+    <div class="dropdown">
+      <span><a href="{% url 'magportal:login' %}">Membership</a></span>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:login' %}">My Profile</a>
+        <a href="{% url 'magportal:login' %}">My Magazines</a>
+      </div>
+    </div>
+    <a href="{% url 'magportal:contact' %}">Contact</a><br>
+    <a href="{% url 'magportal:login' %}">Login</a>
+    {% endif %}
+  </div>
+  <div class="third-div" style="position: relative">
+    {% for result in results %}
+      <img class="mag-img" src="{{ result.Image.url }}" id="img{{forloop.counter}}"/>
+    {% endfor %}
+  </div>
+    <div class="third-div">
+    {% for result in results %}
+      <span id="desc{{forloop.counter}}" class="mag-desc"> 
+        <h1>{{result.Name}}</h1>
+        {% if user.is_authenticated %}
+          {% if result in favourites %}
+              <a href="{% url 'magportal:unfavourite' result.Slug %}" class="clear-btn">Remove from favourites </a><br>
+          {% else %}
+              <a href="{% url 'magportal:favourite' result.Slug %}" class="clear-btn">Add to favourites </a><br>
+          {% endif %}
+        {% endif %}
+        <br>
+        <hr>
+        <p>{{result.Description}}</p>
+        <hr>
+        <br>
+        <a href="#" class="blu-btn">Subscriber Price - {{result.DiscountPrice}}</a>
+        <a href="#" class="clear-btn"> Full Price - {{result.Price}}</a>
+        <br>
+        <br>
+        <br>
+        {% if membership %}
+        <a href="{% url 'magportal:discount' result.Slug %}" class="clear-btn">View your discount code!</a><br>
+        {% endif %}
+      </span>
+    {% endfor %} 
+    </div>
+{% endblock %}

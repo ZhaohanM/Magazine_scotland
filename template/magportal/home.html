@@ -1,0 +1,53 @@
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Home Page
+{% endblock %}
+
+{% block body_block %}
+  {% if user.is_authenticated %}
+  <div class="third-div nav-third">
+    <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+    <div class="dropdown">
+      <a href="{% url 'magportal:membership' %}">Membership</a>
+      <div class="dropdown-content">
+        <a href="{% url 'magportal:edit_profile' user.get_username|slugify %}" >My Profile</a>
+        <p><a href="{% url 'magportal:view_profile' user.get_username|slugify %}">My Magazines</a></p>
+      </div>
+    </div>
+    <a href="{% url 'magportal:contact' %}">Contact</a><br>
+    
+      <a href="{% url 'magportal:logout' %}">Logout</a><br>
+      {% if staff %}
+        <a href="{% url 'magportal:codes' %}">Discount Codes (admin only)</a>
+        {% endif %}
+    {% else %}
+    <div class="third-div nav-third">
+      <a href="{% url 'magportal:browse_magazines'%}">All Magazines</a><br>
+      <div class="dropdown">
+      <a href="{% url 'magportal:login' %}">Membership</a>
+        <div class="dropdown-content">
+          <a href="{% url 'magportal:login' %}">My Profile</a>
+          <a href="{% url 'magportal:login' %}">My Magazines</a>
+        </div>
+      </div>
+      <a href="{% url 'magportal:contact' %}">Contact</a><br>	
+      <a href="{% url 'magportal:login' %}">Login</a><br>
+    {% endif %}
+  </div>
+  <div class="third-div">
+    <p style="margin: 40px;">
+    <span style="font-size: 20px;">
+      About CLÒ<br><br>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+      fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+      mollit anim id est laborum.
+    </span>
+    </p>
+  </div>
+  <div class="third-div">
+  </div>
+{% endblock %}

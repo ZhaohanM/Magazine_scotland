@@ -1,0 +1,17 @@
+.fav-mags a {
+    font-size: 20px;
+    display: block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: black;
+}
+
+.fav-mags a:hover{
+    color: #2F52E0;
+}
+
+.fav-mags {
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: center;
+}

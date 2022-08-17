@@ -1,0 +1,30 @@
+.landing-div{
+    width: 100%;
+    height: 100%;
+}
+
+.landing-div::-webkit-scrollbar {
+    display: none;
+}
+
+.landing-div img{
+    display: inline-block;
+}
+
+.behind {
+    opacity: 0.6;
+    z-index: -1;
+}
+
+img{
+    position: relative;
+}
+
+.text-box {
+    position: absolute;
+    color: #2F52E0;
+    max-width: 18%;
+    font-size: 27px;
+    white-space:normal;
+    z-index: 2;
+}

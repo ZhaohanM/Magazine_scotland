@@ -1,0 +1,85 @@
+.nav-pills {
+   position:fixed;
+   top:80px;
+   left:60px;
+}
+
+.mag a span {
+   display:none;
+   color:black;
+   position: fixed;
+   bottom: 180px;
+   left: 500px;
+   }
+.mag a li {
+   display:none;
+   color:black;
+   position: fixed;
+   top: 580px;
+   left: 500px;
+   }
+
+.mag a:hover span {display:block;}
+.mag a:hover li {display:block;}
+
+.cats {
+   text-align: left;
+   position: relative;
+   left: 60px;       
+   bottom: -45px
+
+   }
+.fav {
+   text-align: left;
+   position: relative;
+   right: -180px;  
+   bottom: -25px;     
+   }
+
+.dropbtn {
+   padding: 16px;
+   font-size: 20px;
+   border: none;
+   cursor: pointer;
+   background-color: transparent;
+   font-family:ABCArizona;
+   }
+
+.dropbtn:hover {
+   color:#2F52E0
+}
+
+.show {display:block;}
+
+.mag-img {
+   max-width: 80%;
+   display: none; 
+   margin: auto; 
+   padding-top: 20px;
+}
+
+.mag-desc {display: none;}
+
+.mag-desc h1 {
+   font-size: 25px;
+   margin: 20px;
+}
+
+.mag-desc p {
+   margin: 20px;
+}
+
+.clear-btn {
+   color: black;
+   border-radius: 5px;
+   border: 1px solid black;
+   margin: 20px;
+   padding: 5px;
+   text-decoration: none;
+}
+
+.mag-scroll {
+   overflow-y: auto; 
+   max-height: 40vh;
+   height: fit-content;
+}

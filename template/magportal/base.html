@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        {% block head_block %}
+        {% endblock %}
+        <title>
+            {% block title_block %}
+                Base test
+            {% endblock %}
+        </title>
+    </head>
+
+    <body style="background-color:#E8E5E2; height: 100%; position: relative;">
+        <div class="top-bar" style="height: 8%;">
+                <a href="{% url 'magportal:home' %}">
+                <img class="logo1" src="{% static 'images/logo.png' %}"/>
+                </a>
+        </div>
+        <div style="height: 90%; width: 100%; position: relative;">
+            {% block body_block %}
+            {% endblock %}
+
+            <div id="content">
+                {% block content_block %}
+                {% endblock %}
+            </div>
+
+            <div class="logo2" >
+                <img src="{% static 'images/logo2.png' %}" style="height: 50px; width: 50px; position: fixed;"/>
+            </div> 
+        </div>
+    </body>
+</html> 

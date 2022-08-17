@@ -1,0 +1,86 @@
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+   Discount code
+{% endblock %}
+
+{% block head_block %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+   body {
+
+      background: #fff;
+      font-family: Nunito, sans-serif;
+      font-size: .9rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #212529;
+   }
+
+   .boom {
+      height: 2px;
+      width: 100%;
+      z-index: 10;
+      position: fixed;
+      top: 0;
+      background: linear-gradient(to right, #44b669 0%, #09a5db 100%);
+      background: -webkit-linear-gradient(to right, #44b669 0%, #09a5db 100%);
+      background: -webkit-gradient(to right, #44b669 0%, #09a5db 100%);
+   }
+
+   .page-description {
+      font-size: 16px;
+   }
+
+   .header {
+      display: inline-block;
+      width: 100%;
+      margin: 300px auto 0;
+      text-align: center;
+   }
+
+   .header .page-name {
+      text-decoration: underline;
+      text-decoration-color: #0c10f7;
+      color: #0c10f7;
+      font-size: 20px;
+      font-weight: normal;
+      margin: 20px auto 0;
+      width: 80%;
+      line-height: 1.3;
+   }
+
+   .header .company-name {
+      color: rgb(0, 0, 0);
+      margin: 5px auto 0;
+      font-size: 22px;
+      font-weight: bold;
+
+      letter-spacing: 1px;
+   }
+</style>
+{% endblock %}
+
+{% block body_block %}
+<div class="boom"></div>
+   <div class="container">
+      <div class="row">
+         <div class="col-md-5 offset-md-4">
+            <div class="header">
+               <div class="page-info">
+               <h3 id="page-name" class="page-name"> {{ result.URL }}</h3>
+               <p class="company-name"> <span id="company-name">Your discount code: {{ hashcode }}</span></p>
+            </div>
+            <div class="page-description">
+               <span id="page-description">Use this code at the checkout</span>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+{% block head_block %}
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body_block %}
+    {% if user.is_authenticated %}
+
+        <div style="text-align: center;">
+            <h2>Already logged in</h2></br>
+            <a href="{% url 'magportal:browse_magazines' %}">Return home</a>
+        </div>
+
+    {% else %}
+
+        <div class="form-container">
+            <div>
+                <h2 class="form-header">Register Here</h1>
+            </div>
+
+            <div class="container">
+                <form class="form-signin" role="form" method="post" action="{% url 'magportal:register' %}">
+                    {% csrf_token %}
+                    <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" required autofocus>
+
+                    <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+
+                    <input type="password" name="password" id="id_password" class="form-control" placeholder="Confirm Password" required>
+                    
+                    <button class="signin-button" type="submit" value="Submit">Sign up</button>
+                </form>
+                {% if errors %}
+                    {{ errors }}
+                {% endif %}
+                <p style="text-align: center;">
+                    Already have an Account?
+                    <a href="{% url 'magportal:login' %}">Login Here</a>
+                </p>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}

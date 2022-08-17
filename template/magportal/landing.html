@@ -1,0 +1,40 @@
+{% extends 'magportal/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    CLÒ - Welcome
+{% endblock %}
+
+{% block head_block %}
+<link href="{% static '/css/landing.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body_block %}
+<div class="landing-div">
+    <div class="text-box" style="margin-left: 5%; top: 10%;">
+        <p>
+            We can trace Scottish printing back to 4 April 1508. On that date the earliest surviving dated book in Scotland was printed in Edinburgh.
+        </p>
+    </div>
+    <div class="text-box" style="margin-left: 40%; top:8%;">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+        </p>
+    </div>
+    <div class="text-box" style="margin-left: 80%; top: 2%; font-size: 80px;">
+        <p>
+            2021
+        </p>
+    </div>
+    <div class="text-box" style="margin-left: 76%; top:22%;">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+        </p>
+    </div>
+    <img src="{% static 'images/scraping-crotal.jpg' %}" style="height:50%; margin-left: 15%; top: 40%; transform: translateY(-50%);" class="behind">
+    <img src="{% static 'images/scraping-crotal.jpg' %}" style="height:30%; margin-left: 20%;" class="behind">
+    <img src="{% static 'images/Waulkin.jpg' %}" style="height:40%; margin-left: -40px; top: 35%;">
+    <a href="{% url 'magportal:home' %}" style="position:absolute; bottom:10px; left:20px; text-decoration: none; color:black; font-size: 30px;">Enter ></a>
+</div>
+{% endblock %}
