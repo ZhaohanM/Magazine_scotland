@@ -63,6 +63,9 @@ python manage.py test magportal.tests
 
 Contributors names and contact info:
 
+Zhaohan Meng
+2582280m@student.gla.ac.uk
+
 Gunraj Gulati
 2502903g@student.gla.ac.uk
 
@@ -71,9 +74,6 @@ Robbie Edgar
 
 Nathan Pham
 2439753p@student.gla.ac.uk
-
-Zhaohan Meng
-2582280m@student.gla.ac.uk
 
 ## Acknowledgements
 *  [Django](https://www.djangoproject.com/) - A high-level Python Web framework that encourages rapid development and clean, pragmatic design.
